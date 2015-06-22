@@ -6,6 +6,18 @@ This is a simple Java program that parses input CSV file.
 From the data it computes reports for each country and quarter of year.
 These reports are then exported to an HTML document.
 
+
+## Running
+
+You can run the program via gradle.
+The CSV input is read from `stdin`.
+Reports are exported as HTML to file `reports.html`.
+
+```
+gradle run < src/test/resources/data.csv
+```
+
+
 ## Tests
 
 You can run tests via gradle:
@@ -13,6 +25,17 @@ You can run tests via gradle:
 ```
 gradle test
 ```
+
+
+## Documentation
+
+The documentation is located in `build/docs/javadoc`.
+It is build via gradle:
+
+```
+gradle javadoc
+```
+
 
 ## TODO
 

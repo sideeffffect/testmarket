@@ -8,6 +8,7 @@ import cz.sideeffect.testmarket.input.DataRow;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -51,5 +52,6 @@ public class ReportTest {
         ExportHtml.export2File(reports, "test.html");
         Assert.assertEquals(Files.readAllLines(Paths.get("src/test/resources/gold.html")),
                             Files.readAllLines(Paths.get("test.html")));
+        boolean ignored = (new File("test.html")).delete();
     }
 }

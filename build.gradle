@@ -14,3 +14,12 @@ dependencies {
 
     compile 'com.opencsv:opencsv:3.4'
 }
+
+apply plugin: 'application'
+
+mainClassName = "cz.sideeffect.testmarket.Main"
+
+run{
+    standardInput = System.in
+}
+
