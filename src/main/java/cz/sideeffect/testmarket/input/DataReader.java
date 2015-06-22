@@ -47,7 +47,7 @@ public class DataReader {
     }
 
     /**
-     * reads and parses the input data
+     * reads and parses the input data, cannot be called after the method close
      * @return list of parsed rows from the input
      */
     public List<DataRow> readData(){
@@ -75,7 +75,7 @@ public class DataReader {
     }
 
     /**
-     * closes the Reader
+     * closes the Reader, after calling this method, the method readData must not be called
      */
     public void close(){
         try {
@@ -84,10 +84,15 @@ public class DataReader {
             throw new RuntimeException(e);
         }
     }
-    
+
+    /**
+     * parses one row of input
+     * @param input one row of the input, each String in the array is a cell
+     * @return
+     */
     private DataRow parseLine(String[] input){
         if(input.length != 4){
-            throw new RuntimeException("Wrong collumns in line, expected 4, got " + input.length);
+            throw new RuntimeException("Wrong columns in line, expected 4, got " + input.length);
         }
         
         Country country = new Country(input[0]);

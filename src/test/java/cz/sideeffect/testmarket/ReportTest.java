@@ -16,10 +16,15 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * Created by ondra on 22.6.15.
+ * This class tests generating and other operatoins with reports.
  */
 public class ReportTest {
-    
+
+    /**
+     * Performs complex testing of generating report from a CSV file.
+     * Checks that the file is correctly parsed and that the report is correctly computed.
+     * @throws IOException
+     */
     @Test
     public void test() throws IOException {
         DataReader reader = new DataReader("src/test/resources/data.csv");
