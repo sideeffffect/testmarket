@@ -37,6 +37,7 @@ public class ExportHtml {
     public static void export2File(List<Report> reports, Writer writer){
         try {
             writer.append(export(reports));
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

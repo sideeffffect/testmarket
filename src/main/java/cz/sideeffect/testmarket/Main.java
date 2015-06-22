@@ -5,10 +5,11 @@ import cz.sideeffect.testmarket.input.DataReader;
 import cz.sideeffect.testmarket.input.DataRow;
 
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 /**
- * Parse a CSV from stdin, export reports to reports.html .
+ * Parse a CSV from stdin, export reports to stdout .
  */
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,6 @@ public class Main {
 
         List<Report> reports = ReportComputer.computeReports(input);
 
-        ExportHtml.export2File(reports, "reports.html");
+        ExportHtml.export2File(reports, new OutputStreamWriter(System.out));
     }
 }

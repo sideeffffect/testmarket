@@ -14,7 +14,7 @@ The CSV input is read from `stdin`.
 Reports are exported as HTML to file `reports.html`.
 
 ```
-gradle run < src/test/resources/data.csv
+gradle -q run < src/test/resources/data.csv > reports.html
 ```
 
 
