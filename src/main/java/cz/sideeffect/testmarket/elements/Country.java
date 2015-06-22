@@ -11,7 +11,12 @@ public class Country implements Comparable<Country> {
      * @param name unique name of the country, case sensitive
      */
     public Country(String name) {
-        this.name = name;
+        if(!name.equals("")) {
+            this.name = name;
+        }
+        else {
+            throw new RuntimeException("Country name cannot be empty string.");
+        }
     }
 
     @Override

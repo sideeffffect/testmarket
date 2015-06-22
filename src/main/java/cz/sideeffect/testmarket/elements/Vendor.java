@@ -11,7 +11,12 @@ public class Vendor implements Comparable<Vendor> {
      * @param name unique name of the vendor, case sensitive
      */
     public Vendor(String name) {
-        this.name = name;
+        if(!name.equals("")) {
+            this.name = name;
+        }
+        else {
+            throw new RuntimeException("Vendor name cannot be empty string.");
+        }
     }
 
     @Override

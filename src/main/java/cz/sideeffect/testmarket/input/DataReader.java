@@ -108,6 +108,9 @@ public class DataReader {
         
         Vendor vendor = new Vendor(input[2]);
         BigDecimal units = new BigDecimal(input[3]);
+        if(units.compareTo(BigDecimal.ZERO) < 0){
+            throw new RuntimeException("Units must be >= 0, got " + units);
+        }
         
         return new DataRow(country, quarterOfYear, vendor, units);
     }
