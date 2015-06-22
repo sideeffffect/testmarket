@@ -75,7 +75,7 @@ public class Report {
      * @return a new report sorted by vendors' names
      */
     public Report sortByVendor(){
-        return sort(new VendorComparator());
+        return sort(new ReportRow.VendorComparator());
     }
 
     /**
@@ -83,7 +83,7 @@ public class Report {
      * @return a new report sorted by units, in descending order
      */
     public Report sortByUnits(){
-        return sort(new UnitsComparator());
+        return sort(new ReportRow.UnitsComparator());
     }
 
     /**
@@ -96,26 +96,5 @@ public class Report {
         newLines.sort(comparator);
 
         return new Report(country, quarter, newLines, total);
-    }
-
-    /**
-     * Class for comparing ReportRow instances by vendor
-     */
-    public static class VendorComparator implements Comparator<ReportRow> {
-        @Override
-        public int compare(ReportRow r1, ReportRow r2) {
-            return r1.vendor.compareTo(r2.vendor);
-        }
-    }
-
-
-    /**
-     * Class for comparing ReportRow instances by units, in descending order
-     */
-    public static class UnitsComparator implements Comparator<ReportRow> {
-        @Override
-        public int compare(ReportRow r1, ReportRow r2) {
-            return r2.units.compareTo(r1.units);
-        }
     }
 }
