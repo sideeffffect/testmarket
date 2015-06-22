@@ -1,5 +1,7 @@
 # Market analysis test
 
+[![Build Status](https://travis-ci.org/sideeffffect/testmarket.svg)](https://travis-ci.org/sideeffffect/testmarket)
+
 This is a simple Java program that parses input CSV file.
 From the data it computes reports for each country and quarter of year.
 These reports are then exported to an HTML document.
