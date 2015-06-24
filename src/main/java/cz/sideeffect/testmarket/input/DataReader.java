@@ -5,6 +5,7 @@ import cz.sideeffect.testmarket.elements.Country;
 import cz.sideeffect.testmarket.elements.Quarter;
 import cz.sideeffect.testmarket.elements.Vendor;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -37,52 +38,41 @@ public class DataReader {
      * creates an instance from the name of the CSV file, caller is responsible for closing the reader
      * @param fileName name of the CSV file
      */
-    public DataReader(String fileName) {
-        try {
-            Reader reader = new FileReader(fileName);
-            this.reader = new CSVReader(reader);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public DataReader(String fileName) throws FileNotFoundException {
+        Reader reader = new FileReader(fileName);
+        this.reader = new CSVReader(reader);
     }
 
     /**
      * reads and parses the input data, cannot be called after the method close
      * @return list of parsed rows from the input
      */
-    public List<DataRow> readData(){
+    public List<DataRow> readData() throws IOException {
         String [] nextLine;
         List<DataRow> lines = new ArrayList<>();
-        try {
-            nextLine = reader.readNext();
-            if(! (nextLine.length == 4)
-            || !  nextLine[0].equals("Country")
-            || !  nextLine[1].equals("Timescale")
-            || !  nextLine[2].equals("Vendor")
-            || !  nextLine[3].equals("Units"))
-            {
-                throw new RuntimeException("Wrong format of input data.");
-            }
-            
-            while ((nextLine = reader.readNext()) != null){
-                lines.add(parseLine(nextLine));
-            }
-            
-            return lines;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        nextLine = reader.readNext();
+        if(! (nextLine.length == 4)
+        || !  nextLine[0].equals("Country")
+        || !  nextLine[1].equals("Timescale")
+        || !  nextLine[2].equals("Vendor")
+        || !  nextLine[3].equals("Units"))
+        {
+            // here we could throw a custom exception for invalid input
+            throw new RuntimeException("Wrong format of input data.");
         }
+        
+        while ((nextLine = reader.readNext()) != null){
+            lines.add(parseLine(nextLine));
+        }
+        
+        return lines;
     }
 
     /**
      * closes the Reader, after calling this method, the method readData must not be called
      */
-    public void close(){
-        try {
-            reader.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void close() throws IOException {
+        reader.close();
     }
 
     /**
@@ -92,6 +82,7 @@ public class DataReader {
      */
     private DataRow parseLine(String[] input){
         if(input.length != 4){
+            // here we could throw a custom exception for invalid input
             throw new RuntimeException("Wrong columns in line, expected 4, got " + input.length);
         }
         
@@ -108,12 +99,14 @@ public class DataReader {
             quarterOfYear = new Quarter(year, quarter);
         }
         else {
+            // here we could throw a custom exception for invalid input
             throw new RuntimeException("Wrongly formatted quarter, got " + input[1]);
         }
         
         Vendor vendor = new Vendor(input[2]);
         BigDecimal units = new BigDecimal(input[3]);
         if(units.compareTo(BigDecimal.ZERO) < 0){
+            // here we could throw a custom exception for invalid input
             throw new RuntimeException("Units must be >= 0, got " + units);
         }
         

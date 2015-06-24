@@ -19,14 +19,10 @@ public class ExportHtml {
      * @param reports reports to export
      * @param outFileName name of the output file
      */
-    public static void export2File(List<Report> reports, String outFileName){
-        try {
-            Writer writer = new FileWriter(outFileName);
-            export2File(reports, writer);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static void export2File(List<Report> reports, String outFileName) throws IOException {
+        Writer writer = new FileWriter(outFileName);
+        export2File(reports, writer);
+        writer.close();
     }
 
     /**
@@ -34,13 +30,9 @@ public class ExportHtml {
      * @param reports reports to export
      * @param writer caller is responsible for closing the writer
      */
-    public static void export2File(List<Report> reports, Writer writer){
-        try {
-            writer.append(export(reports));
-            writer.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static void export2File(List<Report> reports, Writer writer) throws IOException {
+        writer.append(export(reports));
+        writer.flush();
     }
 
     /**

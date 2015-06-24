@@ -32,7 +32,7 @@ public class ReportComputer {
 
     /**
      * Computes reports from the input
-     * @param inputRows list of individual parsed input rows 
+     * @param inputRows list of individual parsed input rows
      * @return reports, structured by Country and Quarter
      */
     public static SortedMap<Country, SortedMap<Quarter, Report>> computeReportsStructured(List<DataRow> inputRows){
@@ -105,6 +105,8 @@ public class ReportComputer {
         for(DataRow row : inputRows){
             BigDecimal oldUnits;
             if(unitsByVendor.containsKey(row.vendor)){
+                // this causes to duplicit (country,quarter,vendor) rows to add up units
+                // the other option is to throw an exception
                 oldUnits = unitsByVendor.get(row.vendor);
             }
             else {
@@ -123,6 +125,9 @@ public class ReportComputer {
                 share = new Share(entry.getValue(), total);
             }
             else {
+                // to cover pathological input where the total = 0
+                // we don't want to divide by 0
+                // the other option is to throw an exception
                 share = new Share(0);
             }
             ReportRow reportRow = new ReportRow(entry.getKey(), entry.getValue(), share);

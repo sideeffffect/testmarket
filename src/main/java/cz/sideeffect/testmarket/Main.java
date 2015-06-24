@@ -4,6 +4,7 @@ import cz.sideeffect.testmarket.export.ExportHtml;
 import cz.sideeffect.testmarket.input.DataReader;
 import cz.sideeffect.testmarket.input.DataRow;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Parse a CSV from stdin, export reports to stdout .
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         DataReader reader = new DataReader(new InputStreamReader(System.in));
         List<DataRow> input = reader.readData();
         reader.close();
