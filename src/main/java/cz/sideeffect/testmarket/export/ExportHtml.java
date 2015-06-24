@@ -63,6 +63,11 @@ public class ExportHtml {
                       "    table-layout: fixed;\n" +
                       "    width: 600px;\n" +
                       "}\n" +
+                      "\n" +
+                      "th {\n" +
+                      "    background-color: #D9D9D9;\n" +
+                      "    font-weight: normal;\n" +
+                      "}" +
                       "</style>\n\n");
         
         int i = 1;
@@ -93,7 +98,7 @@ public class ExportHtml {
             sb.append(reportLine2html(line));
         }
 
-        sb.append("<tr>\n"
+        sb.append("<tr bgcolor=\"#FFFF99\">\n"
                       + "  <td align=\"center\">Total</td>\n"
                       + "  <td align=\"center\">" + formatUnits(report.total) + "</td>\n"
                       + "  <td align=\"center\">100 %</td>\n"
